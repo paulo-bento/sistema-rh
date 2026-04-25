@@ -2,7 +2,9 @@
 {% block content %}
 <div class="page-header">
     <h2>Registros de Horas</h2>
-    <a href="{% url 'registro_create' %}" class="btn">+ Novo</a>
+    {% if user.is_staff %}
+        <a href="{% url 'registro_create' %}" class="btn">+ Novo</a>
+    {% endif %}
 </div>
 
 <div class="table-card">
