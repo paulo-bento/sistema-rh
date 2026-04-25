@@ -1,0 +1,14 @@
+{% extends 'rh/base.html' %}
+{% block content %}
+<h2>{{ funcionario }}</h2>
+<p>Departamento: {{ funcionario.departamento }}</p>
+<p>Cargo: {{ funcionario.get_cargo_display }}</p>
+<p>Salário: R$ {{ funcionario.salario }}</p>
+<p>Carga horária semanal: {{ funcionario.carga_horaria_semanal }}h</p>
+<p>Admissão: {{ funcionario.data_admissao }}</p>
+
+{% if user.is_staff %}
+    <a href="{% url 'funcionario_update' funcionario.pk %}" class="btn-editar">Editar</a>
+    <a href="{% url 'funcionario_delete' funcionario.pk %}" class="btn-excluir">Excluir</a>
+{% endif %}
+{% endblock %}

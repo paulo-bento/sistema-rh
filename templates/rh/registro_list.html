@@ -1,0 +1,37 @@
+{% extends 'rh/base.html' %}
+{% block content %}
+<div class="page-header">
+    <h2>Registros de Horas</h2>
+    <a href="{% url 'registro_create' %}" class="btn">+ Novo</a>
+</div>
+
+<div class="table-card">
+<table>
+    <thead><tr><th>Funcionário</th><th>Data</th><th>Horas</th><th>Extras</th><th>Ações</th></tr></thead>
+    <tbody>
+        {% for r in registros %}
+        <tr>
+            <td>{{ r.funcionario }}</td>
+            <td>{{ r.data }}</td>
+            <td>{{ r.horas_trabalhadas }}h</td>
+            <td>{{ r.horas_extras }}h</td>
+            <td>
+                {% if user.is_staff %}
+                    <a href="{% url 'registro_update' r.pk %}" class="btn-editar">Editar</a>
+                    <a href="{% url 'registro_delete' r.pk %}" class="btn-excluir">Excluir</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5">Nenhum registro encontrado.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+<div class="pagination">
+    {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}">Anterior</a>{% endif %}
+    <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+    {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}">Próxima</a>{% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'rh/base.html' %}
+{% block content %}
+<div class="form-card">
+    <h2>Confirmar exclusão</h2>
+    <p>Deseja excluir <strong>{{ object }}</strong>?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmar</button>
+        <a href="{% url 'funcionario_list' %}">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

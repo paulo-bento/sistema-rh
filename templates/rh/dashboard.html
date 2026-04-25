@@ -1,0 +1,49 @@
+{% extends 'rh/base.html' %}
+{% block content %}
+<h2>Dashboard</h2>
+{% if user.is_staff %}
+    <div class="stat-row">
+        <div class="stat-card">
+            <div class="stat-value">{{ total_funcionarios }}</div>
+            <div class="stat-label">Funcionários cadastrados</div>
+        </div>
+    </div>
+    <h3>Admissões recentes</h3>
+    <div class="table-card">
+        <table>
+            <thead><tr><th>Nome</th><th>Cargo</th><th>Admissão</th></tr></thead>
+            <tbody>
+                {% for f in funcionarios_recentes %}
+                <tr>
+                    <td>{{ f }}</td>
+                    <td>{{ f.get_cargo_display }}</td>
+                    <td>{{ f.data_admissao }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    {% if funcionario %}
+        <p>Bem-vindo, <strong>{{ user.get_full_name }}</strong></p>
+        <p>Cargo: {{ funcionario.get_cargo_display }} — {{ funcionario.departamento }}</p>
+        <h3>Últimos registros</h3>
+        <div class="table-card">
+            <table>
+                <thead><tr><th>Data</th><th>Horas</th><th>Extras</th></tr></thead>
+                <tbody>
+                    {% for r in registros_recentes %}
+                    <tr>
+                        <td>{{ r.data }}</td>
+                        <td>{{ r.horas_trabalhadas }}h</td>
+                        <td>{{ r.horas_extras }}h</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p>Seu perfil de funcionário ainda não foi configurado.</p>
+    {% endif %}
+{% endif %}
+{% endblock %}
