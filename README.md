@@ -126,7 +126,7 @@ Acesse em: [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
 ## 👥 Equipe
 
-Felipe Erik, João Paulo e Raul Carvalho
+Felipe Erik, João Paulo, Raul Carvalho e Kaio Cẽsar
 
 ---
 
